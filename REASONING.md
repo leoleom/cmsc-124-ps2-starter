@@ -28,13 +28,13 @@ All types are Integer where one of them has no inherent value. A logical index s
 A factor stores integer codes plus a levels attribute. The levels c("low","high") map low→1 and high→2, so low, high, low is stored as codes 1,2,1 but displays as labels. typeof() reports the storage, which is integer (not factor or character). Length is 3 and it's a plain vector, so dim is none.
 
 ## P08
-Replace this line with the rule that decides this case.
+A list is a container whose elements keep their own types so scores = c(3L,5L) stays an integer vector [3,5], and label = "A" stays a character ["A"]. Unlike c(), a list does not coerce elements to a common type.length() counts top-level elements, so it's 2 (two items), not the total values inside and A list carries no dimension so no dim.
 
 ## P09
-Replace this line with the rule that decides this case.
+A data frame is a list of equal-length columns, so the type is a list even though it is a class data.frame. Length counts towards the columns, not the 4 cells created by the list. Columns are the id holding integers with corresponding passed holding logicals, and dim follows the data frame rows × columns, so 2x2 it is. The value is data.frame[2x2]{id=[1,2],passed=[TRUE,FALSE]}.
 
 ## P10
-Replace this line with the rule that decides this case.
+Given is a 6 element values divided into 2 rows resulting to 2x3 dim. It also applies an arithmetic operation with 2 elements so recycling is inevitable, repeating down the column storage order so 10 adds to positions 1,3,5 and 20 to 2,4,6. The final yield would be matrix[2x3](11,22,13,24,15,26) with type integer, length 6, and dim 2x3.
 
 ## P11
 Given theres a missing value, finding the mean will yield NA aswell as it needs a definite values for each. Type is double as Real = Double. Plain vector so no dim
