@@ -43,13 +43,13 @@ Given theres a missing value, finding the mean will yield NA aswell as it needs 
 A more defined version of P11 here we effectively remove NA values so we can proceed and apply the mean function and yield a defined value. Type is Double and vector is plain so no dim
 
 ## P13
-Replace this line with the rule that decides this case.
+Putting 2.5 into slot 2 of the integer vector 1:3 forces the whole vector to widen to double, so 1 and 3 become doubles too. Value is [1,2.5,3], type double, length 3, no dim.
 
 ## P14
-Replace this line with the rule that decides this case.
+ifelse goes one position at a time so the NA becomes 0 and the rest double to 14, 0, 24, 8. The mask adjusted > 15 then catches only the 24 and replaces it with 15. Value is [14,0,15,8], type double, length 4, no dim.
 
 ## P15
-Replace this line with the rule that decides this case.
+An array is a vector with a dim attribute, and since 1:8 is integer the array stays integer. The 2x2x2 shape gives 8 cells filled in storage order so the values stay 1 to 8. Value is array2x2x2, type integer, length 8, dim 2x2x2.
 
 ## P16
-Replace this line with the rule that decides this case.
+Index 0 is allowed in R even though counting starts at 1, and it selects nothing. So the result is an empty vector that keeps the original type. Value is [], type integer, length 0, no dim.
