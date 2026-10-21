@@ -1,6 +1,9 @@
 # Vector and Scalar Evaluation
 
-Replace this paragraph after your checks pass. Trace one input, including the
-missing value, through `clean_scores_vector()` and `clean_scores_scalar()`.
-Compare the two evaluation models, identify where recycling would change the
-answer, and explain which implementation you would keep in an R program.
+In clean_scores_vector(), `scores * 2` doubles all four values at once and gives 16, NA, 24, 8. The NA obviously stays NA because any operation on a missing value will give a missing value. `out[is.na(out)] <- 0` marks only Grace's position and replaces it with 0 since Grace's score is missing. Last, `out[out > 20] <- 20` marks only Linus's score of 24 and caps it to 20. The resulting vector is 16, 0, 20, 8 with the names still attached. Additionally, the order of the steps matters here since NA has to be replaced before the logical indexing, because `out > 20` on an NA would give NA instead of TRUE or FALSE.
+
+In clean_scores_scalar(), the loop handles one element per pass/iteration. For Ada, is.na is FALSE, so her score's value is doubled (8 * 2 = 16), which is not over 20, so out[[1]] becomes 16. For Grace, is.na is TRUE, so out[[2]] becomes 0 and the doubling is skipped. For Linus, value is 24, which is over 20, so it is capped and becomes 20. For Barbara, value is 8 from her original 4. Writing with out[[i]] assigns each result to its corresponding position while preserving the vector's names.
+
+Overall, both implementations produce the same cleaned scores but differ in how operations are repeated. The vector version applies each operation to every element at once, while the scalar version handles one element per iteration using an if statement. Recycling becomes a concern when vectors of different lengths are combined. For example, `scores * c(2, 3)` alternates between multiplying by 2 and 3. R does not issue a warning because the multiplier's length divides the length of scores evenly. As a result, Barbara's score is multiplied by 3 instead of 2, changing it from 8 to 12. 
+
+We would keep the vector version because it is shorter, easier to maintain, and uses built-in vectorized operations that can be more efficient than explicit loops. Although the scalar version is easier to follow step by step, it requires more code and careful indexing to preserve names. We would consider it if the cleaning rules varied for each element. However, the vector version is more suitable here because the same cleaning rules apply to every score.
